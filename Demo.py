@@ -2,10 +2,15 @@ import pandas as pd
 import numpy as np
 import sys
 import spotipy
-import spotipy.util as util
 
-sp = spotipy.Spotify()
 
-results = sp.search(q='weezer', limit=20)
-for i, t in enumerate(results['tracks']['items']):
-    print ' ', i, t['name']
+lz_uri = 'spotify:artist:36QJpDe2go2KgaRleHCDTp'
+
+spotify = spotipy.Spotify()
+results = spotify.artist_top_tracks(lz_uri)
+
+for track in results['tracks'][:10]:
+    print 'track    : ' + track['name']
+    print 'audio    : ' + track['preview_url']
+    print 'cover art: ' + track['album']['images'][0]['url']
+    print
